@@ -1,0 +1,6 @@
+ usuarios: [
+            {nombre: 'Pedro', apellido: 'Perez', edad: 34, capacitacion: true, foto: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-512.png'},
+            {nombre: 'Juan', apellido: 'Paz', edad: 43, capacitacion: false, foto: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/12_avatar-512.png'},
+            {nombre: 'Maria', apellido: 'Gonzalez', edad: 27, capacitacion: false, foto: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/11_avatar-512.png'},
+            {nombre: 'Ana', apellido: 'Gimenez', edad: 36, capacitacion: true, foto: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/9_avatar-512.png'}
+        ]
