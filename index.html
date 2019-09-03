@@ -12,6 +12,70 @@
 </head>
 <body>
 
+<div id="app">
+    <div class="container">
+        <div class="jumbotron">
+             <h1>{{mensaje}} - {{parrafo}}</h1>
+             <p>{{parrafo}}</p>
+             {{numero}}
+             <img v-bind:src="imagen">
+             
+             <input type="text" v-bind:value="valor">
+             <input type="text" :value="valor">
 
+             <input type="text" v-model="valor">
+
+             <h2 v-text="numero"></h2>
+             <p v-html="generarHtml()"></p>
+             <button v-on:click="modificarNumero(-15)">+</button>
+             <button v-on:click="modificarNumero(15)">-</button>
+             <button @click="modificarNumero(15)">xxx</button>
+             <div v-if="numero>200">
+                 <p>NUMERO MAYOR A 200</p>
+             </div>
+             <div v-else-if="numero>100 && numero<150">
+                    <p>NUMERO ENTRE 100 Y 150 </p>
+             </div>
+             <div v-else>
+                    <p>NINGUNO DE LOS OTROS</p>
+             </div>
+             <span class="bg-danger" v-if="mostrar">Muestro este párrafo con V-IF</span>
+             <span class="bg-primary" v-show="mostrar">Muestro este párrafo con V-SHOW</span>
+
+            <p v-for="item in usuarios">{{item.apellido}},{{item.nombre}}</p>
+            <table class="table">
+                <tr class="bg-primary">
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Capacitación</th>
+                    <th>Foto</th>
+                </tr>
+                <tr v-for="(usuario,index) in usuarios">
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.edad}}</td>
+                        <td>{{usuario.capacitacion? 'Si':'No'}}</td>
+                        <td><img :src="usuario.foto" height="50"></td>
+                </tr>
+            </table>
+
+            <div class="alert alert-success">Cantidad de usuarios capacitados: {{usuariosCapacitados.capacitacion}} de {{usuariosCapacitados.total}}</div>
+
+            <div v-for="(item,index) in usuarios" class="media">
+                    <img :src="item.foto" height="120">
+                    <div class="media-body">
+                        {{item.nombre}} {{item.apellido}}
+                        <p>Edad: {{item.edad}}</p>
+                        Capacitación: <input type="checkbox" v-model="item.capacitacion">
+                        <button class="btn btn-danger sm" v-on:click="deleteItem(index)">X</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="js/main.js"></script>   
 </body>
 </html>
