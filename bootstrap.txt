@@ -1,0 +1,9 @@
+npm i bootstrap jquery popper.js
+
+
+Importar en ...src/main.js: 
+
+
+import 'bootstrap'; 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
