@@ -1,0 +1,3 @@
+https://apis.datos.gob.ar/georef/api/municipios?provincia=06&campos=id,nombre&max=100
+
+https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre
