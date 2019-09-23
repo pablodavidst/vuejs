@@ -1,0 +1,22 @@
+ computed:{
+        cnombre(){
+            var valor=true;
+            var mensaje=''
+
+            if ( !this.nuevo && this.nombre==''){
+                valor=false,
+                mensaje='El campo no puede ser vacío'
+          
+            return {valor:valor,mensaje:mensaje}
+        }
+    }       
+
+var reg = new RegExp("^([0-9]{7,8})$")
+
+valor = reg.test(this.formulario.documento.valor);
+mensaje = valor? '':'El DNI es inválido'
+
+reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+valor = re2.test(String(email).toLowerCase());
+
+mensaje = valor? '':'El e-mail es inválido'
