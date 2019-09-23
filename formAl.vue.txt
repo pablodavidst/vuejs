@@ -1,0 +1,125 @@
+<template>
+
+  <div class="jumbotron" style="background-color:purple; color:white">
+    <h1>Http Component</h1>
+        <button class="btn btn-success mx-3" @click="alertaLocal()">alerta local</button>
+        <button class="btn btn-success mx-3" @click="alertaGlobal()">alerta global</button>
+    {{ mensaje | uppercase | cortar}}
+    <hr>
+    <div class="my-3"></div>
+    <button class="btn btn-success mx-3" @click="obtenerAlumnos()">GET</button>
+    <button class="btn btn-info mx-3" @click="enviarAlumno()">POST</button>
+    <formAl v-on:procesarNuevo="enviarAlumno($event)"></formAl>
+    <div class="my-3"></div>
+    <hr>
+    <br>
+
+    <div v-if="cargando" class="alert alert-info">
+      <h1>Cargando Alumnos ...</h1>
+    </div>
+    <div v-else-if="alumnos.length!=0">
+      <div class="media my-3" v-for="(alumno,index) in alumnos" :key="index">
+        <img :src="alumno.foto" style="border-radius: 50%;" :alt="alumno.nombre">
+        <div class="media-body ml-3">
+          <p><b>{{alumno.nombre}}</b> ({{index}})</p>
+          <p><i>{{alumno.descripcion}}</i></p>
+          <button class="btn btn-danger mx-3" @click="borrarAlumno(alumno.id)">DELETE</button>
+          <button class="btn btn-warning mx-3" @click="actualizarAlumno(alumno.id)">PUT</button>
+              <formAl></formAl>
+
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+  import mixinLocal from '../mismixins'  
+  import formAl from '@/components/form.vue'  
+
+ import Axios from 'axios';
+
+  export default  {
+    name: 'Alumnos',
+    components:{formAl},
+    data() {
+      return {
+        url : 'https://5c8ef17a3e557700145e85c7.mockapi.io/alumnos',
+        alumnos: [],
+        cargando : false,
+        mensaje: 'Mensaje desde el componente',
+        fotoMujer:0,
+        fotoHombre:0
+      }
+    },
+    filters:{
+      cortar(value){
+        return value.substring(2, value.length)
+      }
+  },
+  mixins:[mixinLocal],
+    methods: {
+      obtenerAlumnos() {
+        this.cargando = true;
+        /*this.alumnos=[];
+        this.alumnos.push({id:1,nombre:'Mariana',foto:this.obtenerFoto('F'),descripcion:'Un comentario de Mariana...'})
+        this.alumnos.push({id:2,nombre:'Martin',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Martín...'})
+        this.alumnos.push({id:3,nombre:'Augusto',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Augusto...'})
+        this.alumnos.push({id:4,nombre:'Pablo',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Pablo...'})
+        this.alumnos.push({id:5,nombre:'Julian',foto:this.obtenerFoto('M'),descripcion:'Un comentario Julian...'})
+                      this.cargando = false;
+*/
+        Axios.get(this.url).then(res => 
+          {
+              console.log(res.data)
+              this.alumnos = res.data;
+              this.cargando = false;
+          }
+        ).catch(err=>{console.log('error en get',err)})
+      },
+      enviarAlumno(param) {
+
+        console.log(param)
+          /*let alumno={nombre:'new',foto:this.obtenerFoto('M'),descripcion:'nuevo alumno'}
+
+          Axios.post(this.url,alumno,{'Content-Type':'application/json'})
+          .then(res=>{console.log(res.data)
+          this.obtenerAlumnos();
+          })
+          .catch(err=>{console.log('error en post',err)})*/
+
+          
+      },
+      borrarAlumno(id) {
+          Axios.delete(this.url+'/'+id,{'Content-Type':'application/json'})
+           .then(res=>{console.log(res.data)
+          this.obtenerAlumnos();
+          })
+          .catch(err=>{console.log('error en delete',err)})      
+      },
+      actualizarAlumno(id) {
+          let alumno={nombre:'chiki',foto:this.obtenerFoto('M'),descripcion:'Actualizando'}
+
+          Axios.put(this.url+'/'+ id,alumno,{'Content-Type':'application/json'})
+           .then(res=>{console.log(res.data)
+          this.obtenerAlumnos();
+          })
+          .catch(err=>{console.log('error en put',err)})
+      },
+      obtenerFoto(sexo){
+          var link='https://randomuser.me/api/portraits/'
+
+                if(sexo=='F'){                  
+                    this.fotoMujer++;
+                    return `${link}/women/${this.fotoMujer}.jpg`
+                }else{
+                    this.fotoHombre++;
+                    return `${link}/men/${this.fotoHombre}.jpg`
+                }
+      },  
+    }
+}
+</script>
+
