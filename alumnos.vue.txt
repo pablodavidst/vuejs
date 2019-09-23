@@ -48,22 +48,22 @@
       obtenerAlumnos() {
         this.cargando = true;
         this.alumnos=[];
-        this.alumnos.push({nombre:'Mariana',foto:this.obtenerFoto('F'),descripcion:'Un comentario de Mariana...'})
-        this.alumnos.push({nombre:'Martin',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Mart韓...'})
-        this.alumnos.push({nombre:'Augusto',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Augusto...'})
-        this.alumnos.push({nombre:'Pablo',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Pablo...'})
-        this.alumnos.push({nombre:'Julian',foto:this.obtenerFoto('M'),descripcion:'Un comentario Julian...'})
+        this.alumnos.push({id:1,nombre:'Mariana',foto:this.obtenerFoto('F'),descripcion:'Un comentario de Mariana...'})
+        this.alumnos.push({id:2,nombre:'Martin',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Mart铆n...'})
+        this.alumnos.push({id:3,nombre:'Augusto',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Augusto...'})
+        this.alumnos.push({id:4,nombre:'Pablo',foto:this.obtenerFoto('M'),descripcion:'Un comentario de Pablo...'})
+        this.alumnos.push({id:5,nombre:'Julian',foto:this.obtenerFoto('M'),descripcion:'Un comentario Julian...'})
         this.cargando = false;
-        alert('Funci髇 que trae lista de alumnos HTTP GET')
+        alert('Funci贸n que trae lista de alumnos HTTP GET')
       },
       enviarAlumno() {
-          alert('Funci髇 que crea un nuevo alumno HTTP POST')      
+          alert('Funci贸n que crea un nuevo alumno HTTP POST')      
       },
       borrarAlumno(id) {
-          alert('Funci髇 que elimina alumno HTTP DELETE')      
+          alert('Funci贸n que elimina alumno HTTP DELETE')      
       },
       actualizarAlumno(id) {
-          alert('Funci髇 que modifica un alumno HTTP PUT')      
+          alert('Funci贸n que modifica un alumno HTTP PUT')      
       },
       obtenerFoto(sexo){
           var link='https://randomuser.me/api/portraits/'
