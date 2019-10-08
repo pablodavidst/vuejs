@@ -15,11 +15,24 @@ export default new Vuex.Store({
      },
      ELIMINAR(state,id){
         state.links.splice(id,1)
+     },
+     ELIMINARTODO(state){
+        state.links=[];
      }
   },
   actions: {
       eliminarLink(context,id){
           context.commit('ELIMINAR',id)
+      },
+      eliminarTodo({commit}){
+          return new Promise((res,rec)=>{
+              setTimeout(
+                ()=>{
+                    commit('ELIMINARTODO');
+                    res();
+                }
+                ,1500)    
+          })
       }
   },
   getters:{
@@ -30,45 +43,30 @@ export default new Vuex.Store({
 })
 
 
-**************************helloworld**************
 
+**************************Detalle**************
 <template>
-  <div class="hello">
-      {{titulo}}
-
-    <form @submit.prevent="agregarLink">
-        <input type="text" v-model="nuevoLink">
-    </form>  
-    <ul>
-      <li v-for="(item, index) in links" :key="index">{{item}} 
-        <button @click="eliminarLink(index)">Borrar</button> 
-        </li>   
-    </ul>      
+  <div class="detalle">
+       <h5>Actualmente hay {{contador}} links en la lista</h5>
+        <button @click="eliminarTodo">Eliminar TODO</button>
   </div>
 </template>
 
 <script>
 
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'HelloWorld',
+  name: 'Detalle',
   computed:{
-     ...mapState(['titulo','links'])
-  },
-  data(){
-      return { nuevoLink:'' }
+     ...mapState(['titulo','links']),
+     ...mapGetters(['contador']),
+     ...mapActions(['eliminarTodo'])
   },
   methods:{
-      agregarLink(){
-          this.AGREGAR(this.nuevoLink);
-          this.nuevoLink='';
-      },
-      eliminarLink(id){
-          this.eliminarLink(id)
-      },
-      ...mapMutations(['AGREGAR']),
-      ...mapActions(['eliminarLink'])
+      removeAll(){
+          this.eliminarTodo;
+      }
   }
 }
 </script>
@@ -90,5 +88,9 @@ li {
 a {
   color: #42b983;
 }
+.detalle{
+  background-color: aquamarine 
+}
 </style>
+
 
